@@ -26,7 +26,7 @@ export default function Todo(){
         if(!cookie) router.push('/')
     },[router])
 
-    const {data} = useSWR(['https://todo-api-puce.vercel.app/api/v1/todo',cookie],fetchWithToken);
+    const {data} = useSWR(['https://notes-vercel.vercel.app/api/v1/todo',cookie],fetchWithToken);
 
     console.log(data)
     

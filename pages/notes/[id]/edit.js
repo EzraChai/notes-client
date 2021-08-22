@@ -24,7 +24,7 @@ export default function Create(){
         }
       }, [cookie])
 
-    const {data} = useSWR([`https://todo-api-puce.vercel.app/api/v1/todo/${router.query.id}`,cookie], fetchWithToken);
+    const {data} = useSWR([`https://notes-vercel.vercel.app/api/v1/todo/${router.query.id}`,cookie], fetchWithToken);
 
 
     useEffect(() => {
@@ -47,7 +47,7 @@ export default function Create(){
                 title : title,
                 description : description,
             }}
-            await fetch(`https://todo-api-puce.vercel.app/api/v1/todo/${router.query.id}`,{
+            await fetch(`https://notes-vercel.vercel.app/api/v1/todo/${router.query.id}`,{
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

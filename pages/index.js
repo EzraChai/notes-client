@@ -24,7 +24,7 @@ export default function Home() {
   const handleForm = async () => {
     setError('')
     setRegister(false)
-    await fetch('https://todo-api-puce.vercel.app/api/v1/users/login',{
+    await fetch('https://notes-vercel.vercel.app/api/v1/user/login',{
       method: 'POST',
       headers: {
       'Content-Type': 'application/json'

@@ -32,7 +32,7 @@ export default function Create(){
                 title : title,
                 description : description,
             }}
-            await fetch('https://todo-api-puce.vercel.app/api/v1/todo',{
+            await fetch('https://notes-vercel.vercel.app/api/v1/todo',{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

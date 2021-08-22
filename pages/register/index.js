@@ -13,7 +13,7 @@ export default function Home() {
   const handleForm = async () => {
     setError('')
     setPassword('')
-    await fetch('https://todo-api-puce.vercel.app/api/v1/users/register',{
+    await fetch('https://notes-vercel.vercel.app/api/v1/user/register',{
       method: 'POST',
       headers: {
       'Content-Type': 'application/json'

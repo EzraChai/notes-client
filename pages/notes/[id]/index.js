@@ -24,7 +24,7 @@ export default function Todo(){
         }
       }, [cookie])
 
-    const {data} = useSWR([`http://localhost:4000/api/v1/todo/${router.query.id}`,cookie], fetchWithToken);
+    const {data} = useSWR([`https://notes-vercel.vercel.app/api/v1/todo/${router.query.id}`,cookie], fetchWithToken);
 
 
     useEffect(() => {
@@ -34,7 +34,7 @@ export default function Todo(){
     },[data])
 
     const deleteHandler = async () =>{
-        await fetch(`http://localhost:4000/api/v1/todo/${router.query.id}`,{
+        await fetch(`https://notes-vercel.vercel.app/api/v1/todo/${router.query.id}`,{
             method: 'DELETE',
             headers:{
                 'Authorization': `Bearer ${cookie}`
