@@ -47,7 +47,7 @@ export default function Home() {
             src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
             alt="Workflow"
           />
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-200">Register now to use MeMo</h2>
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-200">Register now to use Notes</h2>
       
         </div>
         <form className="mt-8 space-y-6">
