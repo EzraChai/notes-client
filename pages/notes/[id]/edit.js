@@ -76,7 +76,7 @@ return (
                 </div>
                 <div className="w-7/8 mx-auto mt-10 flex items-center justify-center bg-white dark:bg-indigo-900 dark:border-black dark:border-4 rounded-xl shadow-lg w-80 lg:w-full md:w-9/12 max-w-7xl">
                 <textarea cols="20" rows="15" value={description} onChange={e => handleDescription(e)} placeholder="Your Note..." id="body" name="body" className="md:hidden text-gray-800 dark:text-gray-100 dark:bg-indigo-900 dark:border-black dark:border-4 my-5 text-center text-lg p-5 "></textarea>
-                <textarea cols="40" rows="15" value={description} onChange={e => handleDescription(e)} placeholder="Your Note..." id="body" name="body" className="md:block lg:hidden text-gray-800 dark:text-gray-100 dark:bg-indigo-900 dark:border-black dark:border-4 my-5 text-center text-xl p-5 "></textarea>
+                <textarea cols="40" rows="15" value={description} onChange={e => handleDescription(e)} placeholder="Your Note..." id="body" name="body" className="hidden md:block lg:hidden text-gray-800 dark:text-gray-100 dark:bg-indigo-900 dark:border-black dark:border-4 my-5 text-center text-xl p-5 "></textarea>
                 <textarea cols="80" rows="15" value={description} onChange={e => handleDescription(e)} placeholder="Your Note..." id="body" name="body" className="hidden lg:block text-gray-800 my-5 dark:text-gray-100 dark:bg-indigo-900 dark:focus:outline-white text-center text-2xl p-5 "></textarea>
                 </div>
             </form>
