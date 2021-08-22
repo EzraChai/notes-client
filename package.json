@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.4.0",
     "@heroicons/react": "^1.0.4",
     "command": "^0.0.5",
     "interweave": "^12.8.0",

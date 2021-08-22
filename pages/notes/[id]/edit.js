@@ -2,7 +2,15 @@ import Head from "next/head";
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie';
 import { useEffect,useState } from 'react';
+import useSWR from 'swr'
 
+
+
+const fetchWithToken = (url,cookie) => fetch(url,{
+    headers:{
+        'Authorization': `Bearer ${cookie}`
+        }
+}).then((response) => response.json())
 
 export default function Create(){
     const router = useRouter();
@@ -15,6 +23,14 @@ export default function Create(){
           router.push('/')
         }
       }, [cookie])
+
+    const {data} = useSWR([`https://todo-api-puce.vercel.app/api/v1/todo/${router.query.id}`,cookie], fetchWithToken);
+
+
+    useEffect(() => {
+        setDescription(data?.todo.description)
+        setTitle(data?.todo.title)
+    },[data])
 
     const handleDescription = e => {
         e.preventDefault()
@@ -31,8 +47,8 @@ export default function Create(){
                 title : title,
                 description : description,
             }}
-            await fetch('http://localhost:4000/api/v1/todo/create',{
-                method: 'POST',
+            await fetch(`https://todo-api-puce.vercel.app/api/v1/todo/${router.query.id}`,{
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${cookie}`
@@ -41,7 +57,7 @@ export default function Create(){
             }).then(resp => {
                 console.log(resp)
                 if(resp.status === 201){
-                    router.push('/memo?done=created')
+                    router.push('/notes?done=edited')
                 }
             });
         }
@@ -50,17 +66,18 @@ export default function Create(){
 return (
 <div>
     <Head>
-        <title>Create a new Notes</title>
+        <title>Edit a Note</title>
     </Head>
     <div>
         <div className="">
             <form action="">
-                <div className="w-7/8 mx-auto mt-20 flex items-center justify-center bg-white dark:bg-indigo-900 dark:border-black dark:border-4 rounded-xl shadow-lg w-80 md:w-full max-w-7xl">
+                <div className="w-7/8 mx-auto mt-20 flex items-center justify-center bg-white dark:bg-indigo-900 dark:border-black dark:border-4 rounded-xl shadow-lg w-80 lg:w-full md:w-9/12 max-w-7xl">
                     <input type="text" placeholder="Title" id="title" name="title" value={title} onChange={e => setTitle(e.target.value)} className="text-indigo-700 dark:text-gray-50 text-center dark:bg-indigo-900 dark:active: w-4/6 my-2 text-xl md:text-3xl p-3 capitalize font-bold"/>
                 </div>
-                <div className="w-7/8 mx-auto mt-10 flex items-center justify-center bg-white dark:bg-indigo-900 dark:border-black dark:border-4 rounded-xl shadow-lg w-80 md:w-full max-w-7xl">
-                <textarea cols="20" rows="15" value={description} onChange={e => setDescription(e.target.value)} placeholder="Your MeMo..." id="body" name="body" className="md:hidden text-gray-800 dark:text-gray-100 dark:bg-indigo-900 dark:border-black dark:border-4 my-5 text-center text-lg p-5 "></textarea>
-                <textarea cols="80" rows="15" value={description} onChange={e => handleDescription(e)} placeholder="Your Notes..." id="body" name="body" className="hidden md:block text-gray-800 my-5 dark:text-gray-100 dark:bg-indigo-900 dark:focus:outline-white text-center text-2xl p-5 "></textarea>
+                <div className="w-7/8 mx-auto mt-10 flex items-center justify-center bg-white dark:bg-indigo-900 dark:border-black dark:border-4 rounded-xl shadow-lg w-80 lg:w-full md:w-9/12 max-w-7xl">
+                <textarea cols="20" rows="15" value={description} onChange={e => handleDescription(e)} placeholder="Your Note..." id="body" name="body" className="md:hidden text-gray-800 dark:text-gray-100 dark:bg-indigo-900 dark:border-black dark:border-4 my-5 text-center text-lg p-5 "></textarea>
+                <textarea cols="40" rows="15" value={description} onChange={e => handleDescription(e)} placeholder="Your Note..." id="body" name="body" className="md:block lg:hidden text-gray-800 dark:text-gray-100 dark:bg-indigo-900 dark:border-black dark:border-4 my-5 text-center text-xl p-5 "></textarea>
+                <textarea cols="80" rows="15" value={description} onChange={e => handleDescription(e)} placeholder="Your Note..." id="body" name="body" className="hidden lg:block text-gray-800 my-5 dark:text-gray-100 dark:bg-indigo-900 dark:focus:outline-white text-center text-2xl p-5 "></textarea>
                 </div>
             </form>
             <button onClick={(e) => handleSubmitForm(e)} className = " fixed z-10 bg-indigo-700 hover:bg-indigo-500 transition text-white w-16 h-16 md:w-20 md:h-20  border-none cursor-pointer rounded-full bottom-4 right-4 md:bottom-12 md:right-12" >

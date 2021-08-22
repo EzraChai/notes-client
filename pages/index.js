@@ -14,7 +14,6 @@ export default function Home() {
   const [times,setTimes] = useState(0)
 
   useEffect(() => {
-    localStorage.theme = 'dark'
     if(router.query.register){
       setRegister(true)
       setTimes(times+1)
@@ -25,7 +24,7 @@ export default function Home() {
   const handleForm = async () => {
     setError('')
     setRegister(false)
-    await fetch('http://localhost:4000/api/v1/users/login',{
+    await fetch('https://todo-api-puce.vercel.app/api/v1/users/login',{
       method: 'POST',
       headers: {
       'Content-Type': 'application/json'
@@ -41,7 +40,7 @@ export default function Home() {
       }
       ///set  Cookie here
       document.cookie = "token=" + data.token/*token location*/
-      router.push('/memo')
+      router.push('/notes')
     })
   .catch(error => {
     console.log(error)
